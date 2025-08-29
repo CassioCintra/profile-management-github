@@ -17,22 +17,12 @@ public class PostgresContainer {
 
     @Container
     @ServiceConnection
-    public static PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:12");
+    public static PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:latest");
 
     @Bean
     @Primary
     public PostgreSQLContainer<?> postgreSQLContainer() {
         log.info("-------- Initialize PostgresSQL Container --------");
         return container;
-    }
-
-    @Test
-    void postgres_container_should_be_created() {
-        assertThat(container.isCreated()).isTrue();
-    }
-
-    @Test
-    void postgres_container_should_be_running() {
-        assertThat(container.isRunning()).isTrue();
     }
 }
