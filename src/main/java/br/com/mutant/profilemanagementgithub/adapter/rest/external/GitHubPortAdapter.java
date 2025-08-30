@@ -23,7 +23,7 @@ public record GitHubPortAdapter(GitHubClient gitHubClient) implements GitHubPort
             if (CollectionUtils.isEmpty(gitHubUsersResponse)) {
                 return Collections.emptyList();
             }
-            return GitHubUserMapper.toGitHubUserList(gitHubUsersResponse);
+            return GitHubUserMapper.toGitHubUsersList(gitHubUsersResponse);
         }catch (FeignException e) {
             throw GitHubException.serviceUnavailable(e);
         }

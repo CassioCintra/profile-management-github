@@ -1,9 +1,12 @@
 package br.com.mutant.profilemanagementgithub.helpers;
 
 import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
+import br.com.mutant.profilemanagementgithub.domain.model.Role;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GitHubUsersFactory {
 
@@ -24,7 +27,17 @@ public class GitHubUsersFactory {
         return new GitHubUser(
                 id,
                 login,
-                url
+                url,
+                new HashSet<>()
+        );
+    }
+
+    public static GitHubUser generateGitHubUserWithRole(Long id, String login, String url) {
+        return new GitHubUser(
+                id,
+                login,
+                url,
+                Set.of(new Role("Test"), new Role("ADM"))
         );
     }
 }

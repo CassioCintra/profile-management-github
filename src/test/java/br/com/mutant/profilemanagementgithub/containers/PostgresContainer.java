@@ -20,6 +20,8 @@ public class PostgresContainer {
     @ServiceConnection
     public PostgreSQLContainer<?> postgreSQLContainer() {
         log.info("-------- Initialize PostgresSQL Container --------");
-        return container;
+        return container
+                .withDatabaseName("github")
+                .withUsername("postgres");
     }
 }
