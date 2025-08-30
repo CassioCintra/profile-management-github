@@ -11,7 +11,6 @@ import org.springframework.util.CollectionUtils;
 import java.util.Collections;
 import java.util.List;
 
-@Slf4j
 @Component
 public record GitHubPortAdapter(GitHubClient gitHubClient) implements GitHubPort {
 
