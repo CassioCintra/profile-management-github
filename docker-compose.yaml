@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: 'postgres:15.3-alpine3.17'
+    environment:
+      - 'POSTGRES_DB=github'
+      - 'POSTGRES_PASSWORD=very-secret-password'
+      - 'POSTGRES_USER=my-user'
+    ports:
+      - '5432'
+    networks:
+      - mutant-network
+
+  app:
+    image: 'cassiocintra:latest'
+    depends_on:
+      - postgres
+    ports:
+      - 8080
+    networks:
+      - mutant-network
+
+networks:
+  mutant-network:
+    driver: bridge

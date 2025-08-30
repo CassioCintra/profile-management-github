@@ -1,0 +1,25 @@
+spring:
+  application:
+   name: profile-management-github
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/github
+    username: my-user
+    password: very-secret-password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.transaction.jta.platform: none
+
+  flyway:
+    enabled: true
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+
+server:
+  port: 8080
