@@ -19,6 +19,11 @@ public class RoleRepositoryAdapter implements RoleRepository {
         repository.save(entity);
     }
 
+    @Override
+    public Boolean existsByName(String name) {
+        return repository.existsByName(name);
+    }
+
     public Role findByName(String name){
         RoleEntity entity = repository.findByName(name);
         return RolesEntityMapper.mapToRole(entity);

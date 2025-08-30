@@ -48,4 +48,23 @@ class RoleRepositoryAdapterTest {
         assertThat(findRole.getName()).isEqualTo(stubRole.getName());
         assertThat(findRole.getName()).isNotEqualTo(anotherStubRole.getName());
     }
+
+    @Test
+    void should_return_true_when_role_exists() {
+        Role stubRole = RolesFactory.generateRole("Test");
+        repositoryAdapter.save(stubRole);
+
+        Boolean roleExists = repositoryAdapter.existsByName(stubRole.getName());
+
+        assertThat(roleExists).isTrue();
+    }
+
+    @Test
+    void should_return_false_when_role_dont_exists() {
+        Role stubRole = RolesFactory.generateRole("Test");
+
+        Boolean roleExists = repositoryAdapter.existsByName(stubRole.getName());
+
+        assertThat(roleExists).isFalse();
+    }
 }

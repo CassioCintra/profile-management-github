@@ -6,4 +6,5 @@ public interface RoleRepository {
 
     void save(Role role);
 
+    Boolean existsByName(String name);
 }
