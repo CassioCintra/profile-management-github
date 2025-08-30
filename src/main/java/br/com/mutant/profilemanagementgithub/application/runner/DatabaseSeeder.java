@@ -22,13 +22,25 @@ public class DatabaseSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        log.info("Running InitialDataRunner ...");
-        List<GitHubUser> userList = gitHubPort.getGitHubUsers(USERS_QUANTITY);
-        if (!userList.isEmpty()){
-            gitHubUserRepository.deleteAll();
-            gitHubUserRepository.saveAll(userList);
-            log.info("GitHub users saved successfully");
+        log.info("Starting database seeder...");
+        try {
+            List<GitHubUser> userList = gitHubPort.getGitHubUsers(USERS_QUANTITY);
+            if (userList == null || userList.isEmpty()) {
+                log.info("No GitHub users found to save. Seeder finished successfully.");
+                return;
+            }
+            persistFoundUsers(userList);
+        } catch (Exception e) {
+            log.error("Database seeder failed to complete! Cause: {}", e.getMessage(), e);
+        } finally {
+            log.info("Database seeder finished.");
         }
-        log.info("Running InitialDataRunner finished");
+    }
+
+    private void persistFoundUsers(List<GitHubUser> userList) {
+        log.info("Found {} GitHub users to save. Starting persistence...", userList.size());
+        gitHubUserRepository.deleteAll();
+        gitHubUserRepository.saveAll(userList);
+        log.info("GitHub users saved successfully!");
     }
 }
