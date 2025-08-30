@@ -2,6 +2,7 @@ package br.com.mutant.profilemanagementgithub.adapter.persistence.repository;
 
 import br.com.mutant.profilemanagementgithub.config.RepositoryIntegrationTest;
 import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
+import br.com.mutant.profilemanagementgithub.helpers.DatabaseCleaner;
 import br.com.mutant.profilemanagementgithub.helpers.GitHubUsersFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,9 +19,12 @@ class GitHubUserRepositoryAdapterTest {
     @Autowired
     private GitHubUserRepositoryAdapter repository;
 
+    @Autowired
+    private DatabaseCleaner databaseCleaner;
+
     @BeforeEach
     void setUp() {
-        repository.deleteAll();
+        databaseCleaner.cleanUp();
     }
 
     @Test

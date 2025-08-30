@@ -6,12 +6,14 @@ import br.com.mutant.profilemanagementgithub.domain.ports.required.GitHubUserRep
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Slf4j
 @Component
+@Profile("!test")
 @RequiredArgsConstructor
 public class DatabaseSeeder implements CommandLineRunner {
 

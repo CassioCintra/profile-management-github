@@ -15,14 +15,11 @@ public class RolesEntityMapper {
         );
     }
 
-    public static RoleEntity mapToRoleEntity(Role role, Long userId){
-        RoleEntity entity = new RoleEntity(
+    public static RoleEntity mapToRoleEntity(Role role){
+        return new RoleEntity(
                 role.getId(),
                 role.getName(),
                 new HashSet<>()
         );
-
-        entity.getUsers().add(new GitHubUserEntity(userId));
-        return entity;
     }
 }

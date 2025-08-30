@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: profile-management-github
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+        highlight_sql: true
+      hibernate.transaction.jta.platform: none
+    show-sql: true
+
+  flyway:
+    enabled: true
+    clean-disabled: false

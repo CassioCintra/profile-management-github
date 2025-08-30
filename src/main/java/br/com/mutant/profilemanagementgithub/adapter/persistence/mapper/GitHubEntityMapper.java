@@ -28,7 +28,7 @@ public class GitHubEntityMapper {
                 new HashSet<>()
         );
         user.getRoles().forEach(role -> entity.getRoles()
-                .add(RolesEntityMapper.mapToRoleEntity(role, entity.getId()))
+                .add(RolesEntityMapper.mapToRoleEntity(role))
         );
         return entity;
     }

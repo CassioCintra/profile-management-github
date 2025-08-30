@@ -1,13 +1,11 @@
 package br.com.mutant.profilemanagementgithub.containers;
 
+import br.com.mutant.profilemanagementgithub.config.ContainerTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
-@Import(PostgresContainer.class)
+@ContainerTest(imports = PostgresContainer.class)
 public class PostgresContainerTest {
 
     @Test
