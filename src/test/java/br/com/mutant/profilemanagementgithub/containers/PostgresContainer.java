@@ -16,11 +16,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PostgresContainer {
 
     @Container
-    @ServiceConnection
-    public static PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:latest");
+    public static PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:15.3-alpine3.17");
 
     @Bean
     @Primary
+    @ServiceConnection
     public PostgreSQLContainer<?> postgreSQLContainer() {
         log.info("-------- Initialize PostgresSQL Container --------");
         return container;
