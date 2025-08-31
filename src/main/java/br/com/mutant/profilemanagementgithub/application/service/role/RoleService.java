@@ -3,7 +3,7 @@ package br.com.mutant.profilemanagementgithub.application.service.role;
 import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleException;
 import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
 import br.com.mutant.profilemanagementgithub.domain.ports.provided.role.CreateRoleUseCase;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.user.RoleRepository;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.role.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

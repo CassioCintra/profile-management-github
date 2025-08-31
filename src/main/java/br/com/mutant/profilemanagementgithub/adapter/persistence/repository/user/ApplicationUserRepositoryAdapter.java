@@ -4,7 +4,7 @@ import br.com.mutant.profilemanagementgithub.adapter.persistence.entity.user.App
 import br.com.mutant.profilemanagementgithub.adapter.persistence.mapper.ApplicationUserEntityMapper;
 import br.com.mutant.profilemanagementgithub.domain.exceptions.user.ApplicationUserException;
 import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.role.ApplicationUserRepository;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.user.ApplicationUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -17,9 +17,10 @@ public class ApplicationUserRepositoryAdapter implements ApplicationUserReposito
     private final ApplicationUserJpaRepository applicationUserJpaRepository;
 
     @Override
-    public void save(ApplicationUser user) {
+    public ApplicationUser save(ApplicationUser user) {
         ApplicationUserEntity entity = ApplicationUserEntityMapper.mapToGitHubUserEntity(user);
-        applicationUserJpaRepository.save(entity);
+        entity = applicationUserJpaRepository.save(entity);
+        return ApplicationUserEntityMapper.mapToGitHubUser(entity);
     }
 
     @Override
@@ -55,5 +56,10 @@ public class ApplicationUserRepositoryAdapter implements ApplicationUserReposito
         return applicationUserJpaRepository.findByLogin(login)
                 .map(ApplicationUserEntityMapper::mapToGitHubUser)
                 .orElseThrow(ApplicationUserException::cannotFindUser);
+    }
+
+    @Override
+    public boolean existsByLogin(String login) {
+        return applicationUserJpaRepository.existsByLogin(login);
     }
 }

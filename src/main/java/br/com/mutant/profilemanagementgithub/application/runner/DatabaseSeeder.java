@@ -2,7 +2,7 @@ package br.com.mutant.profilemanagementgithub.application.runner;
 
 import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
 import br.com.mutant.profilemanagementgithub.domain.ports.required.githubapi.GitHubApiPort;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.role.ApplicationUserRepository;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.user.ApplicationUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;

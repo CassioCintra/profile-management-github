@@ -12,4 +12,12 @@ public class ApplicationUserException extends RuntimeException {
     public static ApplicationUserException cannotFindUser() {
         return new ApplicationUserException("User ID is required and cannot be null");
     }
+
+    public static ApplicationUserException userLoginAlreadyExists() {
+        return new ApplicationUserException("User login already exists.");
+    }
+
+    public static ApplicationUserException userCanNotBeNull() {
+        return new ApplicationUserException("User can not be null");
+    }
 }

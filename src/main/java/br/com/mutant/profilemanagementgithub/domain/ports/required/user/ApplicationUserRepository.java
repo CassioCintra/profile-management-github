@@ -1,4 +1,4 @@
-package br.com.mutant.profilemanagementgithub.domain.ports.required.role;
+package br.com.mutant.profilemanagementgithub.domain.ports.required.user;
 
 import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
 
@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ApplicationUserRepository {
 
-    void save(ApplicationUser user);
+    ApplicationUser save(ApplicationUser user);
     void saveAll(List<ApplicationUser> users);
     void deleteAll();
 
@@ -15,4 +15,6 @@ public interface ApplicationUserRepository {
     ApplicationUser findById(Long userId);
 
     ApplicationUser findByLogin(String login);
+
+    boolean existsByLogin(String login);
 }

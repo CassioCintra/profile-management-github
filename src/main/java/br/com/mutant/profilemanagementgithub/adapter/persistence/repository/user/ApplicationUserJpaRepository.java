@@ -18,4 +18,11 @@ public interface ApplicationUserJpaRepository extends JpaRepository<ApplicationU
     List<ApplicationUserEntity> findAll();
 
     Optional<ApplicationUserEntity> findByLogin(String login);
+
+    @Query("""
+        SELECT COUNT(user) > 0
+        FROM ApplicationUserEntity user
+        WHERE user.login = :login
+    """)
+    boolean existsByLogin(String login);
 }

@@ -1,4 +1,4 @@
-package br.com.mutant.profilemanagementgithub.domain.ports.required.user;
+package br.com.mutant.profilemanagementgithub.domain.ports.required.role;
 
 import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
 

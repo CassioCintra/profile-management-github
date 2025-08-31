@@ -4,7 +4,7 @@ import br.com.mutant.profilemanagementgithub.adapter.persistence.entity.role.Rol
 import br.com.mutant.profilemanagementgithub.adapter.persistence.mapper.RolesEntityMapper;
 import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleException;
 import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.user.RoleRepository;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.role.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

@@ -4,8 +4,8 @@ import br.com.mutant.profilemanagementgithub.domain.exceptions.user.ApplicationU
 import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleException;
 import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
 import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.role.ApplicationUserRepository;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.user.RoleRepository;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.user.ApplicationUserRepository;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.role.RoleRepository;
 import br.com.mutant.profilemanagementgithub.helpers.ApplicationUsersFactory;
 import br.com.mutant.profilemanagementgithub.helpers.RolesFactory;
 import org.junit.jupiter.api.Test;
@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -82,5 +83,35 @@ class ApplicationUserServiceTest {
 
         verify(applicationUserRepository).findAll();
         assertThat(applicationUsers).isEmpty();
+    }
+
+    @Test
+    void should_save_user(){
+        ApplicationUser applicationUser = ApplicationUsersFactory.generateGitHubUser(1L, "Login", "www.url.com");
+        when(applicationUserRepository.existsByLogin(any())).thenReturn(false);
+        when(applicationUserRepository.save(any())).thenReturn(applicationUser);
+
+        applicationUser = applicationUserService.create(applicationUser);
+
+        verify(applicationUserRepository).existsByLogin(applicationUser.getLogin());
+        verify(applicationUserRepository).save(applicationUser);
+        assertThat(applicationUser.getId()).isNotNull();
+    }
+
+    @Test
+    void should_throw_exception_when_user_is_null(){
+        assertThatThrownBy(() -> applicationUserService.create(null))
+                .isInstanceOf(ApplicationUserException.class)
+                .hasMessageContaining("User can not be null");
+    }
+
+    @Test
+    void should_throw_exception_when_user_login_already_exists(){
+        ApplicationUser applicationUser = ApplicationUsersFactory.generateGitHubUser(1L, "Login", "www.url.com");
+        when(applicationUserRepository.existsByLogin(any())).thenReturn(true);
+
+        assertThatThrownBy(() -> applicationUserService.create(applicationUser))
+                .isInstanceOf(ApplicationUserException.class)
+                .hasMessageContaining("User login already exists.");
     }
 }

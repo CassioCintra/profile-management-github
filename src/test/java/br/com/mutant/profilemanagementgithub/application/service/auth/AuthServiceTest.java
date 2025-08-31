@@ -2,7 +2,7 @@ package br.com.mutant.profilemanagementgithub.application.service.auth;
 
 import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
 import br.com.mutant.profilemanagementgithub.domain.model.auth.AuthRequest;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.role.ApplicationUserRepository;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.user.ApplicationUserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

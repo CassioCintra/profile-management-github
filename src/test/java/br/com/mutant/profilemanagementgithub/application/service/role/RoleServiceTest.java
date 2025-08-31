@@ -2,7 +2,7 @@ package br.com.mutant.profilemanagementgithub.application.service.role;
 
 import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleException;
 import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.user.RoleRepository;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.role.RoleRepository;
 import br.com.mutant.profilemanagementgithub.helpers.RolesFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,7 +1,7 @@
 package br.com.mutant.profilemanagementgithub.application.service.security;
 
 import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.role.ApplicationUserRepository;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.user.ApplicationUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

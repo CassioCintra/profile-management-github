@@ -1,7 +1,7 @@
 package br.com.mutant.profilemanagementgithub.application.service.security;
 
 import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.role.ApplicationUserRepository;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.user.ApplicationUserRepository;
 import br.com.mutant.profilemanagementgithub.helpers.ApplicationUsersFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

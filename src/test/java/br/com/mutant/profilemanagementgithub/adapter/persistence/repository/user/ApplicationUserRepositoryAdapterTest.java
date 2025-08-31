@@ -108,4 +108,23 @@ class ApplicationUserRepositoryAdapterTest {
         assertThat(findUser.getLogin()).isEqualTo(stubApplicationUser.getLogin());
         assertThat(findUser.getUrl()).isEqualTo(stubApplicationUser.getUrl());
     }
+
+    @Test
+    void should_return_true_if_user_login_already_exists() {
+        ApplicationUser applicationUser = ApplicationUsersFactory.generateGitHubUserWithRole(1L, "login", "http://url.com/");
+        repository.save(applicationUser);
+
+        Boolean find = repository.existsByLogin(applicationUser.getLogin());
+
+        assertThat(find).isTrue();
+    }
+
+    @Test
+    void should_return_false_if_user_login_not_exists() {
+        ApplicationUser applicationUser = ApplicationUsersFactory.generateGitHubUserWithRole(1L, "login", "http://url.com/");
+
+        Boolean find = repository.existsByLogin(applicationUser.getLogin());
+
+        assertThat(find).isFalse();
+    }
 }
