@@ -84,5 +84,17 @@ class GitHubUserRepositoryAdapterTest {
         assertThat(findUsers.getFirst().getRoles().size()).isEqualTo(stubGitHubUser.getRoles().size());
     }
 
+    @Test
+    void should_find_github_user_by_id() {
+        GitHubUser stubGitHubUser = GitHubUsersFactory.generateGitHubUserWithRole(1L, "login", "http://url.com/");
+        repository.save(stubGitHubUser);
+
+        GitHubUser findUser = repository.findById(stubGitHubUser.getId());
+
+        assertThat(findUser.getId()).isNotNull();
+        assertThat(findUser.getLogin()).isEqualTo(stubGitHubUser.getLogin());
+        assertThat(findUser.getUrl()).isEqualTo(stubGitHubUser.getUrl());
+    }
+
 
 }

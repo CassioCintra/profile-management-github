@@ -4,7 +4,6 @@ import br.com.mutant.profilemanagementgithub.domain.exceptions.GitHubException;
 import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
 import br.com.mutant.profilemanagementgithub.helpers.GitHubApiFactory;
 import br.com.mutant.profilemanagementgithub.helpers.GitHubUsersFactory;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -2,6 +2,7 @@ package br.com.mutant.profilemanagementgithub.adapter.persistence.repository;
 
 import br.com.mutant.profilemanagementgithub.adapter.persistence.entity.GitHubUserEntity;
 import br.com.mutant.profilemanagementgithub.adapter.persistence.mapper.GitHubEntityMapper;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.GitHubUserException;
 import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
 import br.com.mutant.profilemanagementgithub.domain.ports.required.GitHubUserRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,5 +41,12 @@ public class GitHubUserRepositoryAdapter implements GitHubUserRepository {
         return entities.stream()
                 .map(GitHubEntityMapper::mapToGitHubUser)
                 .toList();
+    }
+
+    @Override
+    public GitHubUser findById(Long userId) {
+        return gitHubUserJpaRepository.findById(userId)
+                .map(GitHubEntityMapper::mapToGitHubUser)
+                .orElseThrow(GitHubUserException::cannotFindUser);
     }
 }

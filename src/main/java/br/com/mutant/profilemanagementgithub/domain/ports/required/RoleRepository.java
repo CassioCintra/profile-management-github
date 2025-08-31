@@ -4,7 +4,9 @@ import br.com.mutant.profilemanagementgithub.domain.model.Role;
 
 public interface RoleRepository {
 
-    void save(Role role);
+    Role save(Role role);
 
     Boolean existsByName(String name);
+
+    Role findById(Long roleId);
 }

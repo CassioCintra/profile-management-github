@@ -67,4 +67,15 @@ class RoleRepositoryAdapterTest {
 
         assertThat(roleExists).isFalse();
     }
+
+    @Test
+    void should_find_role_by_id() {
+        Role stubRole = RolesFactory.generateRole("Test");
+        stubRole = repositoryAdapter.save(stubRole);
+
+        Role findRole = repositoryAdapter.findById(stubRole.getId());
+
+        assertThat(findRole).isNotNull();
+        assertThat(findRole.getName()).isEqualTo(stubRole.getName());
+    }
 }

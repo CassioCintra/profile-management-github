@@ -7,4 +7,8 @@ public class RolesFactory {
     public static Role generateRole(String roleName) {
         return new Role(roleName);
     }
+
+    public static Role generateRole(Long roleId, String roleName) {
+        return new Role(roleId, roleName);
+    }
 }

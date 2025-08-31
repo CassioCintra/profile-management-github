@@ -1,7 +1,6 @@
 package br.com.mutant.profilemanagementgithub.config;
 
 import br.com.mutant.profilemanagementgithub.containers.PostgresContainer;
-import br.com.mutant.profilemanagementgithub.helpers.DatabaseCleaner;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;

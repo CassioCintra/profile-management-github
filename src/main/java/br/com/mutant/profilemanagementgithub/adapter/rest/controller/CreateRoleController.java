@@ -16,6 +16,7 @@ public class CreateRoleController {
 
     private final CreateRoleUseCase createRoleUseCase;
 
+    // TODO criar dtos de request e response
     @PostMapping
     public ResponseEntity<Void> createNewRole(@RequestBody Role role){
         createRoleUseCase.createNewRole(role);
