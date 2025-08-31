@@ -26,14 +26,14 @@ class AddRoleToUserControllerTest {
 
     @Test
     void should_add_a_new_role_to_user_and_return_200_ok() throws Exception {
+        Long userId = 1L;
         doNothing().when(addRoleToUserUseCase).addRoleToUser(any(), any());
 
         mockMvc.perform(
-                post("/api/users")
+                post("/api/users/{userId}/roles", userId)
                         .param("roleId", "1")
-                        .param("userId", "1")
                         .with(csrf())
                 )
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 }
