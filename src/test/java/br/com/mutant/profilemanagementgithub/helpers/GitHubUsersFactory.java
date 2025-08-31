@@ -27,6 +27,7 @@ public class GitHubUsersFactory {
         return new GitHubUser(
                 id,
                 login,
+                "password",
                 url,
                 new HashSet<>()
         );
@@ -36,6 +37,7 @@ public class GitHubUsersFactory {
         return new GitHubUser(
                 id,
                 login,
+                "password",
                 url,
                 Set.of(new Role("Test"), new Role("ADM"))
         );

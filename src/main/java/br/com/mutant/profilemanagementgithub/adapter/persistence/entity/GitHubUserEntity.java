@@ -16,8 +16,8 @@ public class GitHubUserEntity {
 
     @Id
     private Long id;
-
     private String login;
+    private String password;
     private String url;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})

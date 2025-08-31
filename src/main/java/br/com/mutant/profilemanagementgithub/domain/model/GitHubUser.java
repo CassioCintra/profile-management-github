@@ -1,6 +1,7 @@
 package br.com.mutant.profilemanagementgithub.domain.model;
 
 import br.com.mutant.profilemanagementgithub.domain.exceptions.RoleException;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.auth.AuthenticationException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,6 +17,7 @@ import java.util.Set;
 public class GitHubUser {
     private Long id;
     private String login;
+    private String password;
     private String url;
     private Set<Role> roles = new HashSet<>();;
 
@@ -28,5 +30,11 @@ public class GitHubUser {
         if(this.roles.contains(requestRole)){
             throw RoleException.alreadyHasRole(requestRole.getName());
         };
+    }
+
+    public void validatePassword(String password) {
+        if (!this.password.equals(password)) {
+            throw AuthenticationException.wrongPassword();
+        }
     }
 }

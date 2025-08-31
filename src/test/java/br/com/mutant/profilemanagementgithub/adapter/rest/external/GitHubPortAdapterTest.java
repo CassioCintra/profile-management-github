@@ -37,9 +37,10 @@ class GitHubPortAdapterTest {
 
         List<GitHubUser> result = gitHubPortAdapter.getGitHubUsers(USERS_QUANTITY);
 
-        assertThat(result).hasSize(USERS_QUANTITY);
-        assertThat(result.getFirst()).isEqualTo(mockUser);
         verify(gitHubClient).getUsers(USERS_QUANTITY);
+        assertThat(result).hasSize(USERS_QUANTITY);
+        assertThat(result.getFirst().getLogin()).isEqualTo(mockUser.getLogin());
+        assertThat(result.getFirst().getUrl()).isEqualTo(mockUser.getUrl());
     }
 
     @Test

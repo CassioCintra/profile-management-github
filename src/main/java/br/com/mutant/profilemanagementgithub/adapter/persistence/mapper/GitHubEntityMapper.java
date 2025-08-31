@@ -11,6 +11,7 @@ public class GitHubEntityMapper {
         GitHubUser user = new GitHubUser(
                 entity.getId(),
                 entity.getLogin(),
+                entity.getPassword(),
                 entity.getUrl(),
                 new HashSet<>()
         );
@@ -24,6 +25,7 @@ public class GitHubEntityMapper {
         GitHubUserEntity entity = new GitHubUserEntity(
                 user.getId(),
                 user.getLogin(),
+                user.getPassword(),
                 user.getUrl(),
                 new HashSet<>()
         );

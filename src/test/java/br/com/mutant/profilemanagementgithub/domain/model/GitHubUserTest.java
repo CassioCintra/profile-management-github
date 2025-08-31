@@ -1,6 +1,7 @@
 package br.com.mutant.profilemanagementgithub.domain.model;
 
 import br.com.mutant.profilemanagementgithub.domain.exceptions.RoleException;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.auth.AuthenticationException;
 import br.com.mutant.profilemanagementgithub.helpers.GitHubUsersFactory;
 import org.junit.jupiter.api.Test;
 
@@ -29,5 +30,15 @@ class GitHubUserTest {
         assertThatThrownBy(() -> gitHubUser.addRole(role))
             .isInstanceOf(RoleException.class)
             .hasMessageContaining("User already have role");
+    }
+
+    @Test
+    void should_throw_a_exception_if_password_dont_match(){
+        GitHubUser gitHubUser = GitHubUsersFactory.generateGitHubUser(1L, "Login", "www.url.com");
+        String wrongPassword = "wrongPassword";
+
+        assertThatThrownBy(() -> gitHubUser.validatePassword(wrongPassword))
+                .isInstanceOf(AuthenticationException.class)
+                .hasMessageContaining(AuthenticationException.wrongPassword().getMessage());
     }
 }

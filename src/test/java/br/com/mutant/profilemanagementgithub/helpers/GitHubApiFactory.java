@@ -9,9 +9,9 @@ public class GitHubApiFactory {
 
     public static List<GitHubUserResponse> generateGitHubUsersResponse(Integer quantity){
         List<GitHubUserResponse> users = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
+        for (Integer i = 0; i < quantity; i++) {
             GitHubUserResponse response = GitHubApiFactory.generateGitHubUserResponse(
-                    (long) i,
+                    i.longValue(),
                     "login" + i,
                     "https://www.url" + i + ".test/"
             );

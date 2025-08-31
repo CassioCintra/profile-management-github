@@ -4,6 +4,7 @@ import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 
 public class GitHubUserMapper {
 
@@ -17,6 +18,7 @@ public class GitHubUserMapper {
         return new GitHubUser(
                 gitHubUserResponse.id(),
                 gitHubUserResponse.login(),
+                UUID.randomUUID().toString(),
                 gitHubUserResponse.url(),
                 new HashSet<>()
         );

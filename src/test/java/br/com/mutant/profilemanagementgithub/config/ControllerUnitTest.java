@@ -1,6 +1,6 @@
 package br.com.mutant.profilemanagementgithub.config;
 
-import br.com.mutant.profilemanagementgithub.adapter.security.JwtAuthenticationFilter;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.test.context.ActiveProfiles;
@@ -10,7 +10,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@WebMvcTest(controllers = {}, excludeAutoConfiguration = {JwtAuthenticationFilter.class})
+@WebMvcTest(controllers = {})
+@AutoConfigureMockMvc(addFilters = false)
 @ActiveProfiles("test")
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
