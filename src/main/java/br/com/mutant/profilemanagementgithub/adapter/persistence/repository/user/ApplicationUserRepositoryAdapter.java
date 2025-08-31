@@ -2,7 +2,7 @@ package br.com.mutant.profilemanagementgithub.adapter.persistence.repository.use
 
 import br.com.mutant.profilemanagementgithub.adapter.persistence.entity.user.ApplicationUserEntity;
 import br.com.mutant.profilemanagementgithub.adapter.persistence.mapper.ApplicationUserEntityMapper;
-import br.com.mutant.profilemanagementgithub.domain.exceptions.user.ApplicationUserException;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.user.UserNotFoundException;
 import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
 import br.com.mutant.profilemanagementgithub.domain.ports.required.user.ApplicationUserRepository;
 import lombok.RequiredArgsConstructor;
@@ -48,14 +48,14 @@ public class ApplicationUserRepositoryAdapter implements ApplicationUserReposito
     public ApplicationUser findById(Long userId) {
         return applicationUserJpaRepository.findById(userId)
                 .map(ApplicationUserEntityMapper::mapToGitHubUser)
-                .orElseThrow(ApplicationUserException::cannotFindUser);
+                .orElseThrow(UserNotFoundException::notFoundById);
     }
 
     @Override
     public ApplicationUser findByLogin(String login) {
         return applicationUserJpaRepository.findByLogin(login)
                 .map(ApplicationUserEntityMapper::mapToGitHubUser)
-                .orElseThrow(ApplicationUserException::cannotFindUser);
+                .orElseThrow(UserNotFoundException::notFoundByLogin);
     }
 
     @Override

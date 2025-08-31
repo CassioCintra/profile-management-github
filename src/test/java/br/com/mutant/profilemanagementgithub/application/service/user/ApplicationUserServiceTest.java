@@ -1,7 +1,8 @@
 package br.com.mutant.profilemanagementgithub.application.service.user;
 
-import br.com.mutant.profilemanagementgithub.domain.exceptions.user.ApplicationUserException;
 import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleException;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.user.InvalidUserDataException;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.user.UserAlreadyExistsException;
 import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
 import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
 import br.com.mutant.profilemanagementgithub.domain.ports.required.user.ApplicationUserRepository;
@@ -16,7 +17,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -53,7 +53,7 @@ class ApplicationUserServiceTest {
     @Test
     void should_throw_exception_when_user_id_is_null() {
         assertThatThrownBy(() -> applicationUserService.addRoleToUser(1L, null))
-                .isInstanceOf(ApplicationUserException.class)
+                .isInstanceOf(InvalidUserDataException.class)
                 .hasMessageContaining("User ID is required and cannot be null");
     }
 
@@ -101,8 +101,8 @@ class ApplicationUserServiceTest {
     @Test
     void should_throw_exception_when_user_is_null(){
         assertThatThrownBy(() -> applicationUserService.create(null))
-                .isInstanceOf(ApplicationUserException.class)
-                .hasMessageContaining("User can not be null");
+                .isInstanceOf(InvalidUserDataException.class)
+                .hasMessageContaining("User cannot be null");
     }
 
     @Test
@@ -111,7 +111,7 @@ class ApplicationUserServiceTest {
         when(applicationUserRepository.existsByLogin(any())).thenReturn(true);
 
         assertThatThrownBy(() -> applicationUserService.create(applicationUser))
-                .isInstanceOf(ApplicationUserException.class)
-                .hasMessageContaining("User login already exists.");
+                .isInstanceOf(UserAlreadyExistsException.class)
+                .hasMessageContaining("Login already exists");
     }
 }

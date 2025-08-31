@@ -1,7 +1,8 @@
 package br.com.mutant.profilemanagementgithub.application.service.user;
 
-import br.com.mutant.profilemanagementgithub.domain.exceptions.user.ApplicationUserException;
 import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleException;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.user.InvalidUserDataException;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.user.UserAlreadyExistsException;
 import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
 import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
 import br.com.mutant.profilemanagementgithub.domain.ports.provided.user.AddRoleToUserUseCase;
@@ -46,7 +47,7 @@ public class ApplicationUserService implements AddRoleToUserUseCase, FetchAllUse
 
     private void validateUserId(Long userId) {
         if (userId == null){
-            throw ApplicationUserException.requiredUserId();
+            throw InvalidUserDataException.userIdNull();
         }
     }
 
@@ -68,13 +69,13 @@ public class ApplicationUserService implements AddRoleToUserUseCase, FetchAllUse
 
     private void validateIfUserLoginAlreadyExists(ApplicationUser applicationUser) {
         if (userRepository.existsByLogin(applicationUser.getLogin())){
-            throw ApplicationUserException.userLoginAlreadyExists();
+            throw UserAlreadyExistsException.loginAlreadyExists();
         }
     }
 
     private static void validateIfUserIsNull(ApplicationUser applicationUser) {
         if (applicationUser == null){
-            throw ApplicationUserException.userCanNotBeNull();
+            throw InvalidUserDataException.userNull();
         }
     }
 }
