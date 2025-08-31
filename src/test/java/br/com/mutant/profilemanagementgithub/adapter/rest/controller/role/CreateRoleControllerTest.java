@@ -1,5 +1,9 @@
 package br.com.mutant.profilemanagementgithub.adapter.rest.controller.role;
 
+import br.com.mutant.profilemanagementgithub.adapter.persistence.mapper.RolesEntityMapper;
+import br.com.mutant.profilemanagementgithub.adapter.rest.controller.role.dto.RoleCreateRequest;
+import br.com.mutant.profilemanagementgithub.adapter.rest.controller.role.dto.RoleResponse;
+import br.com.mutant.profilemanagementgithub.adapter.rest.controller.role.mapper.RestRoleMapper;
 import br.com.mutant.profilemanagementgithub.config.ControllerUnitTest;
 import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
 import br.com.mutant.profilemanagementgithub.domain.ports.provided.role.CreateRoleUseCase;
@@ -12,8 +16,11 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.mockito.Mockito.doNothing;
 
@@ -32,14 +39,17 @@ class CreateRoleControllerTest {
 
     @Test
     void should_create_new_role_and_return_200_ok() throws Exception {
-        Role newRole = RolesFactory.generateRole("NewRole");
+        RoleCreateRequest request = new RoleCreateRequest("NewRole");
+        Role newRole = RolesFactory.generateRole(1L, "NewRole");
+        RoleResponse roleResponse = RestRoleMapper.mapperToRoleResponse(newRole);
 
-        doNothing().when(createRoleUseCase).createNewRole(newRole);
+        when(createRoleUseCase.createNewRole(any())).thenReturn(newRole);
 
         mockMvc.perform(post("/api/role")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(newRole))
+                        .content(objectMapper.writeValueAsString(request))
                         .with(csrf()))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated())
+                .andExpect(content().json(objectMapper.writeValueAsString(roleResponse)));
     }
 }

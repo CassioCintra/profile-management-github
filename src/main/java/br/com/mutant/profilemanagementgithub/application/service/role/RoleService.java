@@ -14,9 +14,10 @@ public class RoleService implements CreateRoleUseCase {
     private final RoleRepository roleRepository;
 
     @Override
-    public void createNewRole(Role role) {
+    public Role createNewRole(Role role) {
         validateRole(role);
-        roleRepository.save(role);
+        role = roleRepository.save(role);
+        return role;
     }
 
     private void validateRole(Role role) {

@@ -4,6 +4,6 @@ import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
 
 public interface CreateRoleUseCase {
 
-    void createNewRole(Role role);
+    Role createNewRole(Role role);
 
 }
