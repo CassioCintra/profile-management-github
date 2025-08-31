@@ -49,4 +49,11 @@ public class GitHubUserRepositoryAdapter implements GitHubUserRepository {
                 .map(GitHubEntityMapper::mapToGitHubUser)
                 .orElseThrow(GitHubUserException::cannotFindUser);
     }
+
+    @Override
+    public GitHubUser findByLogin(String login) {
+        return gitHubUserJpaRepository.findByLogin(login)
+                .map(GitHubEntityMapper::mapToGitHubUser)
+                .orElseThrow(GitHubUserException::cannotFindUser);
+    }
 }

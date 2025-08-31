@@ -1,6 +1,7 @@
 package br.com.mutant.profilemanagementgithub.adapter.persistence.repository;
 
 import br.com.mutant.profilemanagementgithub.config.RepositoryIntegrationTest;
+import br.com.mutant.profilemanagementgithub.containers.PostgresContainer;
 import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
 import br.com.mutant.profilemanagementgithub.helpers.DatabaseCleaner;
 import br.com.mutant.profilemanagementgithub.helpers.GitHubUsersFactory;
@@ -13,7 +14,7 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RepositoryIntegrationTest
+@RepositoryIntegrationTest(imports = {GitHubUserRepositoryAdapter.class, PostgresContainer.class, DatabaseCleaner.class})
 class GitHubUserRepositoryAdapterTest {
 
     @Autowired
@@ -96,5 +97,15 @@ class GitHubUserRepositoryAdapterTest {
         assertThat(findUser.getUrl()).isEqualTo(stubGitHubUser.getUrl());
     }
 
+    @Test
+    void should_find_user_by_login(){
+        GitHubUser stubGitHubUser = GitHubUsersFactory.generateGitHubUserWithRole(1L, "login", "http://url.com/");
+        repository.save(stubGitHubUser);
 
+        GitHubUser findUser = repository.findByLogin(stubGitHubUser.getLogin());
+
+        assertThat(findUser.getId()).isNotNull();
+        assertThat(findUser.getLogin()).isEqualTo(stubGitHubUser.getLogin());
+        assertThat(findUser.getUrl()).isEqualTo(stubGitHubUser.getUrl());
+    }
 }

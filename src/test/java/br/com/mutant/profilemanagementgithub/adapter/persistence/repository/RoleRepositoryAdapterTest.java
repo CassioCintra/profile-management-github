@@ -1,6 +1,7 @@
 package br.com.mutant.profilemanagementgithub.adapter.persistence.repository;
 
 import br.com.mutant.profilemanagementgithub.config.RepositoryIntegrationTest;
+import br.com.mutant.profilemanagementgithub.containers.PostgresContainer;
 import br.com.mutant.profilemanagementgithub.domain.model.Role;
 import br.com.mutant.profilemanagementgithub.helpers.DatabaseCleaner;
 import br.com.mutant.profilemanagementgithub.helpers.RolesFactory;
@@ -10,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RepositoryIntegrationTest
+@RepositoryIntegrationTest(imports = {RoleRepositoryAdapter.class, PostgresContainer.class, DatabaseCleaner.class})
 class RoleRepositoryAdapterTest {
 
     @Autowired

@@ -1,5 +1,6 @@
 package br.com.mutant.profilemanagementgithub.adapter.rest.controller;
 
+import br.com.mutant.profilemanagementgithub.config.ControllerUnitTest;
 import br.com.mutant.profilemanagementgithub.domain.model.Role;
 import br.com.mutant.profilemanagementgithub.domain.ports.provided.CreateRoleUseCase;
 import br.com.mutant.profilemanagementgithub.helpers.RolesFactory;
@@ -18,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.mockito.Mockito.doNothing;
 
 @WithMockUser
-@WebMvcTest(CreateRoleController.class)
+@ControllerUnitTest(controllers = CreateRoleController.class)
 class CreateRoleControllerTest {
 
     @Autowired

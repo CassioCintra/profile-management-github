@@ -13,4 +13,6 @@ public interface GitHubUserRepository {
     List<GitHubUser> findAll();
 
     GitHubUser findById(Long userId);
+
+    GitHubUser findByLogin(String login);
 }

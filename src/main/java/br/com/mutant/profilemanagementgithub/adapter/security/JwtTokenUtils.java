@@ -14,7 +14,6 @@ import javax.crypto.SecretKey;
 import java.time.OffsetDateTime;
 import java.util.Date;
 
-
 @Slf4j
 @Component
 public class JwtTokenUtils {

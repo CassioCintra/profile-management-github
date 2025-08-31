@@ -1,22 +1,21 @@
 package br.com.mutant.profilemanagementgithub.adapter.rest.controller;
 
+import br.com.mutant.profilemanagementgithub.config.ControllerUnitTest;
 import br.com.mutant.profilemanagementgithub.domain.ports.provided.AddRoleToUserUseCase;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WithMockUser
-@WebMvcTest(AddRoleToUserController.class)
+@ControllerUnitTest(controllers = AddRoleToUserController.class)
 class AddRoleToUserControllerTest {
 
     @MockitoBean

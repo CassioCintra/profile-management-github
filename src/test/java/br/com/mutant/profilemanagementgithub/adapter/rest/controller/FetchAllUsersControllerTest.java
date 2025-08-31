@@ -1,5 +1,6 @@
 package br.com.mutant.profilemanagementgithub.adapter.rest.controller;
 
+import br.com.mutant.profilemanagementgithub.config.ControllerUnitTest;
 import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
 import br.com.mutant.profilemanagementgithub.domain.ports.provided.AddRoleToUserUseCase;
 import br.com.mutant.profilemanagementgithub.domain.ports.provided.FetchAllUsersUseCase;
@@ -24,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WithMockUser
-@WebMvcTest(FetchAllUsersController.class)
+@ControllerUnitTest(controllers = FetchAllUsersController.class)
 class FetchAllUsersControllerTest {
 
     @MockitoBean
