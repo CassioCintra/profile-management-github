@@ -30,7 +30,7 @@ class AddRoleToUserControllerTest {
         doNothing().when(addRoleToUserUseCase).addRoleToUser(any(), any());
 
         mockMvc.perform(
-                post("/api/user")
+                post("/api/users")
                         .param("roleId", "1")
                         .param("userId", "1")
                         .with(csrf())
