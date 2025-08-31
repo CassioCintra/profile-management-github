@@ -1,5 +1,7 @@
 package br.com.mutant.profilemanagementgithub.adapter.rest.controller.user;
 
+import br.com.mutant.profilemanagementgithub.adapter.rest.controller.user.dto.UserResponse;
+import br.com.mutant.profilemanagementgithub.adapter.rest.controller.user.mapper.RestUserMapper;
 import br.com.mutant.profilemanagementgithub.config.ControllerUnitTest;
 import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
 import br.com.mutant.profilemanagementgithub.domain.ports.provided.user.FetchAllUsersUseCase;
@@ -37,10 +39,11 @@ class FetchAllUsersControllerTest {
     void fetch_all_users_and_return_200_ok() throws Exception {
         List<ApplicationUser> findUsers = ApplicationUsersFactory.generateGitHubUsers(30);
         when(fetchAllUsersUseCase.findAllUsers()).thenReturn(findUsers);
+        List<UserResponse> responses = findUsers.stream().map(RestUserMapper::mapperToUserResponse).toList();
 
         mockMvc.perform(get("/api/users"))
                 .andExpect(status().isOk())
-                .andExpect(content().json(objectMapper.writeValueAsString(findUsers)));
+                .andExpect(content().json(objectMapper.writeValueAsString(responses)));
     }
 
     @Test
