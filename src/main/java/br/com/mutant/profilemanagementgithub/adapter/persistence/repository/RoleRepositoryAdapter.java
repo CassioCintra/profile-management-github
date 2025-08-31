@@ -37,8 +37,4 @@ public class RoleRepositoryAdapter implements RoleRepository {
         RoleEntity entity = repository.findByName(name);
         return RolesEntityMapper.mapToRole(entity);
     }
-
-    public void deleteAll() {
-        repository.deleteAll();
-    }
 }
