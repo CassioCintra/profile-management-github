@@ -1,8 +1,8 @@
 package br.com.mutant.profilemanagementgithub.application.service.auth;
 
-import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
+import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
 import br.com.mutant.profilemanagementgithub.domain.model.auth.AuthRequest;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.GitHubUserRepository;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.role.ApplicationUserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,20 +17,20 @@ import static org.mockito.Mockito.*;
 class AuthServiceTest {
 
     @Mock
-    private GitHubUserRepository gitHubUserRepository;
+    private ApplicationUserRepository applicationUserRepository;
 
     @InjectMocks
     private AuthService authService;
 
     @Test
     void should_return_user_with_login_and_password() {
-        GitHubUser user = mock(GitHubUser.class);
+        ApplicationUser user = mock(ApplicationUser.class);
         AuthRequest request = new AuthRequest(user.getLogin(), user.getPassword());
-        when(gitHubUserRepository.findByLogin(any())).thenReturn(user);
+        when(applicationUserRepository.findByLogin(any())).thenReturn(user);
 
-        GitHubUser returnedUser = authService.authorize(request);
+        ApplicationUser returnedUser = authService.authorize(request);
 
-        verify(gitHubUserRepository).findByLogin(any());
+        verify(applicationUserRepository).findByLogin(any());
         verify(user).validatePassword(any());
         assertThat(user.getLogin()).isEqualTo(returnedUser.getLogin());
     }

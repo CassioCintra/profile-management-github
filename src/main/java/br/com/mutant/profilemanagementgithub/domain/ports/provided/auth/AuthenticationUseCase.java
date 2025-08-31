@@ -1,9 +1,9 @@
 package br.com.mutant.profilemanagementgithub.domain.ports.provided.auth;
 
-import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
+import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
 import br.com.mutant.profilemanagementgithub.domain.model.auth.AuthRequest;
 
 public interface AuthenticationUseCase {
 
-    GitHubUser authorize(AuthRequest authRequest);
+    ApplicationUser authorize(AuthRequest authRequest);
 }

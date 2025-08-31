@@ -1,8 +1,7 @@
 package br.com.mutant.profilemanagementgithub.adapter.persistence.mapper;
 
-import br.com.mutant.profilemanagementgithub.adapter.persistence.entity.GitHubUserEntity;
-import br.com.mutant.profilemanagementgithub.adapter.persistence.entity.RoleEntity;
-import br.com.mutant.profilemanagementgithub.domain.model.Role;
+import br.com.mutant.profilemanagementgithub.adapter.persistence.entity.role.RoleEntity;
+import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
 
 import java.util.HashSet;
 

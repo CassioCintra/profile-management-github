@@ -3,7 +3,7 @@ package br.com.mutant.profilemanagementgithub.adapter.rest.controller.auth;
 import br.com.mutant.profilemanagementgithub.adapter.rest.controller.auth.dto.JwtResponse;
 import br.com.mutant.profilemanagementgithub.adapter.rest.controller.auth.dto.LoginRequest;
 import br.com.mutant.profilemanagementgithub.adapter.security.JwtTokenUtils;
-import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
+import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
 import br.com.mutant.profilemanagementgithub.domain.model.auth.AuthRequest;
 import br.com.mutant.profilemanagementgithub.domain.ports.provided.auth.AuthenticationUseCase;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody LoginRequest loginRequest){
 
-        GitHubUser user = authenticationUseCase.authorize(
+        ApplicationUser user = authenticationUseCase.authorize(
                 new AuthRequest(loginRequest.login(), loginRequest.password()));
 
         String token = jwtTokenUtils.generateToken(user.getLogin());

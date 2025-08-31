@@ -1,6 +1,6 @@
 package br.com.mutant.profilemanagementgithub.adapter.security;
 
-import br.com.mutant.profilemanagementgithub.application.service.userdetails.CustomUserDetailsService;
+import br.com.mutant.profilemanagementgithub.application.service.security.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,9 +1,9 @@
 package br.com.mutant.profilemanagementgithub.application.runner;
 
-import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.GitHubPort;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.GitHubUserRepository;
-import br.com.mutant.profilemanagementgithub.helpers.GitHubUsersFactory;
+import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.githubapi.GitHubApiPort;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.role.ApplicationUserRepository;
+import br.com.mutant.profilemanagementgithub.helpers.ApplicationUsersFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,10 +19,10 @@ import static org.mockito.Mockito.*;
 class DatabaseSeederTest {
 
     @Mock
-    private GitHubPort gitHubPort;
+    private GitHubApiPort gitHubApiPort;
 
     @Mock
-    private GitHubUserRepository gitHubUserRepository;
+    private ApplicationUserRepository applicationUserRepository;
 
     @InjectMocks
     private DatabaseSeeder databaseSeeder;
@@ -31,24 +31,24 @@ class DatabaseSeederTest {
 
     @Test
     void should_save_users_when_api_returns_data() {
-        List<GitHubUser> gitHubUsers = GitHubUsersFactory.generateGitHubUsers(USERS_QUANTITY);
-        when(gitHubPort.getGitHubUsers(USERS_QUANTITY)).thenReturn(gitHubUsers);
+        List<ApplicationUser> applicationUsers = ApplicationUsersFactory.generateGitHubUsers(USERS_QUANTITY);
+        when(gitHubApiPort.getGitHubUsers(USERS_QUANTITY)).thenReturn(applicationUsers);
 
         databaseSeeder.run();
 
-        verify(gitHubPort).getGitHubUsers(USERS_QUANTITY);
-        verify(gitHubUserRepository).deleteAll();
-        verify(gitHubUserRepository).saveAll(gitHubUsers);
+        verify(gitHubApiPort).getGitHubUsers(USERS_QUANTITY);
+        verify(applicationUserRepository).deleteAll();
+        verify(applicationUserRepository).saveAll(applicationUsers);
     }
 
     @Test
     void should_not_save_users_when_api_returns_empty_list() {
-        when(gitHubPort.getGitHubUsers(USERS_QUANTITY)).thenReturn(List.of());
+        when(gitHubApiPort.getGitHubUsers(USERS_QUANTITY)).thenReturn(List.of());
 
         databaseSeeder.run();
 
-        verify(gitHubPort).getGitHubUsers(USERS_QUANTITY);
-        verify(gitHubUserRepository, never()).deleteAll();
-        verify(gitHubUserRepository, never()).saveAll(anyList());
+        verify(gitHubApiPort).getGitHubUsers(USERS_QUANTITY);
+        verify(applicationUserRepository, never()).deleteAll();
+        verify(applicationUserRepository, never()).saveAll(anyList());
     }
 }

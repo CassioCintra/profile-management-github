@@ -1,6 +1,6 @@
 package br.com.mutant.profilemanagementgithub.helpers;
 
-import br.com.mutant.profilemanagementgithub.domain.model.Role;
+import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
 
 public class RolesFactory {
 

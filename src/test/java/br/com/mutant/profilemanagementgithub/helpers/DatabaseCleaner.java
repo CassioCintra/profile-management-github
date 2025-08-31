@@ -1,7 +1,7 @@
 package br.com.mutant.profilemanagementgithub.helpers;
 
-import br.com.mutant.profilemanagementgithub.adapter.persistence.repository.GitHubUserJpaRepository;
-import br.com.mutant.profilemanagementgithub.adapter.persistence.repository.RoleJpaRepository;
+import br.com.mutant.profilemanagementgithub.adapter.persistence.repository.user.ApplicationUserJpaRepository;
+import br.com.mutant.profilemanagementgithub.adapter.persistence.repository.role.RoleJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class DatabaseCleaner {
 
-    private final GitHubUserJpaRepository userJpaRepository;
+    private final ApplicationUserJpaRepository userJpaRepository;
     private final RoleJpaRepository roleJpaRepository;
 
     public void cleanUp(){

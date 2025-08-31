@@ -1,9 +1,9 @@
 package br.com.mutant.profilemanagementgithub.application.service.auth;
 
-import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
+import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
 import br.com.mutant.profilemanagementgithub.domain.model.auth.AuthRequest;
 import br.com.mutant.profilemanagementgithub.domain.ports.provided.auth.AuthenticationUseCase;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.GitHubUserRepository;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.role.ApplicationUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService implements AuthenticationUseCase {
 
-    private final GitHubUserRepository userRepository;
+    private final ApplicationUserRepository userRepository;
 
     @Override
-    public GitHubUser authorize(AuthRequest authRequest) {
-        GitHubUser user = userRepository.findByLogin(authRequest.getLogin());
+    public ApplicationUser authorize(AuthRequest authRequest) {
+        ApplicationUser user = userRepository.findByLogin(authRequest.getLogin());
 
         user.validatePassword(authRequest.getPassword());
 

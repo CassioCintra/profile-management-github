@@ -1,8 +1,8 @@
 package br.com.mutant.profilemanagementgithub.application.runner;
 
-import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.GitHubPort;
-import br.com.mutant.profilemanagementgithub.domain.ports.required.GitHubUserRepository;
+import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.githubapi.GitHubApiPort;
+import br.com.mutant.profilemanagementgithub.domain.ports.required.role.ApplicationUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -17,8 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DatabaseSeeder implements CommandLineRunner {
 
-    private final GitHubPort gitHubPort;
-    private final GitHubUserRepository gitHubUserRepository;
+    private final GitHubApiPort gitHubApiPort;
+    private final ApplicationUserRepository applicationUserRepository;
 
     private static final Integer USERS_QUANTITY = 30;
 
@@ -26,7 +26,7 @@ public class DatabaseSeeder implements CommandLineRunner {
     public void run(String... args) {
         log.info("Starting database seeder...");
         try {
-            List<GitHubUser> userList = gitHubPort.getGitHubUsers(USERS_QUANTITY);
+            List<ApplicationUser> userList = gitHubApiPort.getGitHubUsers(USERS_QUANTITY);
             if (userList == null || userList.isEmpty()) {
                 log.info("No GitHub users found to save. Seeder finished successfully.");
                 return;
@@ -39,10 +39,10 @@ public class DatabaseSeeder implements CommandLineRunner {
         }
     }
 
-    private void persistFoundUsers(List<GitHubUser> userList) {
+    private void persistFoundUsers(List<ApplicationUser> userList) {
         log.info("Found {} GitHub users to save. Starting persistence...", userList.size());
-        gitHubUserRepository.deleteAll();
-        gitHubUserRepository.saveAll(userList);
+        applicationUserRepository.deleteAll();
+        applicationUserRepository.saveAll(userList);
         log.info("GitHub users saved successfully!");
     }
 }

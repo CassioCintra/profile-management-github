@@ -4,14 +4,13 @@ import br.com.mutant.profilemanagementgithub.adapter.rest.controller.auth.dto.Jw
 import br.com.mutant.profilemanagementgithub.adapter.rest.controller.auth.dto.LoginRequest;
 import br.com.mutant.profilemanagementgithub.adapter.security.JwtTokenUtils;
 import br.com.mutant.profilemanagementgithub.config.ControllerUnitTest;
-import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
+import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
 import br.com.mutant.profilemanagementgithub.domain.ports.provided.auth.AuthenticationUseCase;
-import br.com.mutant.profilemanagementgithub.helpers.GitHubUsersFactory;
+import br.com.mutant.profilemanagementgithub.helpers.ApplicationUsersFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -40,7 +39,7 @@ class AuthenticationControllerTest {
 
     @Test
     void should_return_jwt_token_and_200_ok() throws Exception {
-        GitHubUser user = GitHubUsersFactory.generateGitHubUser(1L, "login", "www.url.com");
+        ApplicationUser user = ApplicationUsersFactory.generateGitHubUser(1L, "login", "www.url.com");
         LoginRequest loginRequest = new LoginRequest(user.getLogin(), user.getPassword());
         JwtResponse response = new JwtResponse("token");
         when(authenticationUseCase.authorize(any())).thenReturn(user);
