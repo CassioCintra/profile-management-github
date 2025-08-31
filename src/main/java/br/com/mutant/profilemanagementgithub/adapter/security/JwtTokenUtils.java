@@ -24,11 +24,11 @@ public class JwtTokenUtils {
     private final Long jwtRenew;
 
     public JwtTokenUtils(@Value("${jwt.secret}") String jwtSecret,
-                         @Value("${jwt.expiration}") Long jwtExpirationInMs,
-                         @Value("${jwt.renew-at}") Long jwtRenewInMs) {
+                         @Value("${jwt.expiration}") Long jwtExpirationInSeconds,
+                         @Value("${jwt.renew-at}") Long jwtRenewInSeconds) {
         this.jwtSecret = jwtSecret;
-        this.jwtExpiration = jwtExpirationInMs;
-        this.jwtRenew = jwtRenewInMs;
+        this.jwtExpiration = jwtExpirationInSeconds;
+        this.jwtRenew = jwtRenewInSeconds;
     }
 
     public String generateToken(String login) {
