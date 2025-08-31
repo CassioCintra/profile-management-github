@@ -1,6 +1,6 @@
 package br.com.mutant.profilemanagementgithub.application.service.user;
 
-import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleException;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleValidationException;
 import br.com.mutant.profilemanagementgithub.domain.exceptions.user.InvalidUserDataException;
 import br.com.mutant.profilemanagementgithub.domain.exceptions.user.UserAlreadyExistsException;
 import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
@@ -41,7 +41,7 @@ public class ApplicationUserService implements AddRoleToUserUseCase, FetchAllUse
 
     private void validateRoleId(Long role) {
         if (role == null){
-            throw RoleException.roleCannotBeNull();
+            throw RoleValidationException.roleCannotBeNull();
         }
     }
 

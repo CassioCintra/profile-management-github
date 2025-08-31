@@ -1,6 +1,6 @@
 package br.com.mutant.profilemanagementgithub.application.service.user;
 
-import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleException;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleValidationException;
 import br.com.mutant.profilemanagementgithub.domain.exceptions.user.InvalidUserDataException;
 import br.com.mutant.profilemanagementgithub.domain.exceptions.user.UserAlreadyExistsException;
 import br.com.mutant.profilemanagementgithub.domain.model.user.ApplicationUser;
@@ -60,7 +60,7 @@ class ApplicationUserServiceTest {
     @Test
     void should_throw_exception_when_role_id_is_null() {
         assertThatThrownBy(() -> applicationUserService.addRoleToUser(null, 1L))
-                .isInstanceOf(RoleException.class)
+                .isInstanceOf(RoleValidationException.class)
                 .hasMessageContaining("Role cannot be null");
     }
 

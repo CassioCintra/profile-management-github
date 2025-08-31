@@ -1,6 +1,6 @@
 package br.com.mutant.profilemanagementgithub.domain.model.user;
 
-import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleException;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleConflictException;
 import br.com.mutant.profilemanagementgithub.domain.exceptions.auth.AuthenticationException;
 import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ public class ApplicationUser {
 
     private void verifyIfAlreadyHasRole(Role requestRole) {
         if(this.roles.contains(requestRole)){
-            throw RoleException.alreadyHasRole(requestRole.getName());
+            throw RoleConflictException.alreadyHasRole(requestRole.getName());
         };
     }
 

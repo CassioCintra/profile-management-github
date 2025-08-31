@@ -1,6 +1,7 @@
 package br.com.mutant.profilemanagementgithub.application.service.role;
 
-import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleException;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleConflictException;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleValidationException;
 import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
 import br.com.mutant.profilemanagementgithub.domain.ports.required.role.RoleRepository;
 import br.com.mutant.profilemanagementgithub.helpers.RolesFactory;
@@ -38,7 +39,7 @@ class RoleServiceTest {
     @Test
     void should_throws_a_exception_when_role_is_null() {
         assertThatThrownBy(() -> roleService.createNewRole(null))
-                .isInstanceOf(RoleException.class)
+                .isInstanceOf(RoleValidationException.class)
                 .hasMessageContaining("Role cannot be null");
     }
 
@@ -47,7 +48,7 @@ class RoleServiceTest {
         Role role = RolesFactory.generateRole(null);
 
         assertThatThrownBy(() -> roleService.createNewRole(role))
-                .isInstanceOf(RoleException.class)
+                .isInstanceOf(RoleValidationException.class)
                 .hasMessageContaining("Role cannot be null");
     }
 
@@ -57,7 +58,7 @@ class RoleServiceTest {
         when(roleRepository.existsByName(any())).thenReturn(true);
 
         assertThatThrownBy(() -> roleService.createNewRole(role))
-                .isInstanceOf(RoleException.class)
-                .hasMessageContaining("Role Test already exists");
+                .isInstanceOf(RoleConflictException.class)
+                .hasMessageContaining("Role 'Test' already exists");
     }
 }

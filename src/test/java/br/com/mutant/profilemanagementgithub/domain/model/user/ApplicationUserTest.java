@@ -1,7 +1,7 @@
 package br.com.mutant.profilemanagementgithub.domain.model.user;
 
-import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleException;
 import br.com.mutant.profilemanagementgithub.domain.exceptions.auth.AuthenticationException;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleConflictException;
 import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
 import br.com.mutant.profilemanagementgithub.helpers.ApplicationUsersFactory;
 import org.junit.jupiter.api.Test;
@@ -29,8 +29,8 @@ class ApplicationUserTest {
         applicationUser.addRole(role);
 
         assertThatThrownBy(() -> applicationUser.addRole(role))
-            .isInstanceOf(RoleException.class)
-            .hasMessageContaining("User already have role");
+            .isInstanceOf(RoleConflictException.class)
+            .hasMessageContaining("User already has role");
     }
 
     @Test

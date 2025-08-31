@@ -2,7 +2,7 @@ package br.com.mutant.profilemanagementgithub.adapter.persistence.repository.rol
 
 import br.com.mutant.profilemanagementgithub.adapter.persistence.entity.role.RoleEntity;
 import br.com.mutant.profilemanagementgithub.adapter.persistence.mapper.RolesEntityMapper;
-import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleException;
+import br.com.mutant.profilemanagementgithub.domain.exceptions.role.RoleNotFoundException;
 import br.com.mutant.profilemanagementgithub.domain.model.role.Role;
 import br.com.mutant.profilemanagementgithub.domain.ports.required.role.RoleRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class RoleRepositoryAdapter implements RoleRepository {
     public Role findById(Long roleId) {
         return repository.findById(roleId)
                 .map(RolesEntityMapper::mapToRole)
-                .orElseThrow(RoleException::cannotFindRole);
+                .orElseThrow(RoleNotFoundException::notFound);
     }
 
     public Role findByName(String name){
