@@ -5,14 +5,17 @@ import br.com.mutant.profilemanagementgithub.domain.exceptions.RoleException;
 import br.com.mutant.profilemanagementgithub.domain.model.GitHubUser;
 import br.com.mutant.profilemanagementgithub.domain.model.Role;
 import br.com.mutant.profilemanagementgithub.domain.ports.provided.AddRoleToUserUseCase;
+import br.com.mutant.profilemanagementgithub.domain.ports.provided.FetchAllUsersUseCase;
 import br.com.mutant.profilemanagementgithub.domain.ports.required.GitHubUserRepository;
 import br.com.mutant.profilemanagementgithub.domain.ports.required.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
-public class GitHubUserService implements AddRoleToUserUseCase {
+public class GitHubUserService implements AddRoleToUserUseCase, FetchAllUsersUseCase {
 
     private final GitHubUserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -44,5 +47,10 @@ public class GitHubUserService implements AddRoleToUserUseCase {
         if (userId == null){
             throw GitHubUserException.requiredUserId();
         }
+    }
+
+    @Override
+    public List<GitHubUser> findAllUsers() {
+        return userRepository.findAll();
     }
 }

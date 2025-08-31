@@ -14,6 +14,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Collections;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -57,5 +61,26 @@ class GitHubUserServiceTest {
         assertThatThrownBy(() -> gitHubUserService.addRoleToUser(null, 1L))
                 .isInstanceOf(RoleException.class)
                 .hasMessageContaining("Role cannot be null");
+    }
+
+    @Test
+    void should_return_all_users() {
+        List<GitHubUser> users = GitHubUsersFactory.generateGitHubUsers(30);
+        when(gitHubUserRepository.findAll()).thenReturn(users);
+
+        List<GitHubUser> gitHubUsers = gitHubUserService.findAllUsers();
+
+        verify(gitHubUserRepository).findAll();
+        assertThat(gitHubUsers).isEqualTo(users);
+    }
+
+    @Test
+    void should_return_empty_list_when_users_is_empty() {
+        when(gitHubUserRepository.findAll()).thenReturn(Collections.emptyList());
+
+        List<GitHubUser> gitHubUsers = gitHubUserService.findAllUsers();
+
+        verify(gitHubUserRepository).findAll();
+        assertThat(gitHubUsers).isEmpty();
     }
 }
