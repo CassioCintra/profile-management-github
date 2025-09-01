@@ -14,7 +14,7 @@ to fetch users when the application starts.
 each request.
 - **Flyway**: Database migration management to ensure schema integrity and versioning.
 - **JPA & Hibernate**: Persistence layer for managing entities.
-- **Testcontainers**: Integration testing with database and external API environments in Docker containers, ensuring 
+- **Testcontainers**: Integration testing with database in Docker containers, ensuring 
 robust and reliable tests.
 
 ---
