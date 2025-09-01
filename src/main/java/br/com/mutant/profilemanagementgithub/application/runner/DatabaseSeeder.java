@@ -31,6 +31,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                 log.info("No GitHub users found to save. Seeder finished successfully.");
                 return;
             }
+            userList.forEach(user -> user.setId(null));
             persistFoundUsers(userList);
         } catch (Exception e) {
             log.error("Database seeder failed to complete! Cause: {}", e.getMessage(), e);
