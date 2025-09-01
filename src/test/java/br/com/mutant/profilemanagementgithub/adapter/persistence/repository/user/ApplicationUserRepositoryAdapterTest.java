@@ -30,7 +30,7 @@ class ApplicationUserRepositoryAdapterTest {
 
     @Test
     void should_save_all_github_users() {
-        List<ApplicationUser> stubApplicationUsers = ApplicationUsersFactory.generateGitHubUsers(10);
+        List<ApplicationUser> stubApplicationUsers = ApplicationUsersFactory.generateGitHubUsersWithoutId(10);
 
         repository.saveAll(stubApplicationUsers);
 
@@ -44,7 +44,7 @@ class ApplicationUserRepositoryAdapterTest {
 
     @Test
     void should_delete_all_github_users() {
-        List<ApplicationUser> stubApplicationUsers = ApplicationUsersFactory.generateGitHubUsers(10);
+        List<ApplicationUser> stubApplicationUsers = ApplicationUsersFactory.generateGitHubUsersWithoutId(10);
         repository.saveAll(stubApplicationUsers);
 
         repository.deleteAll();
@@ -55,7 +55,7 @@ class ApplicationUserRepositoryAdapterTest {
 
     @Test
     void should_find_all_github_users() {
-        List<ApplicationUser> stubApplicationUsers = ApplicationUsersFactory.generateGitHubUsers(10);
+        List<ApplicationUser> stubApplicationUsers = ApplicationUsersFactory.generateGitHubUsersWithoutId(10);
         repository.saveAll(stubApplicationUsers);
 
         List<ApplicationUser> persistedUsers = repository.findAll();
@@ -65,7 +65,7 @@ class ApplicationUserRepositoryAdapterTest {
 
     @Test
     void should_save_a_github_user_with_role(){
-        ApplicationUser stubApplicationUser = ApplicationUsersFactory.generateGitHubUserWithRole(0L, "login", "http://url.com/");
+        ApplicationUser stubApplicationUser = ApplicationUsersFactory.generateGitHubUserWithRole(null, "login", "http://url.com/");
 
         repository.save(stubApplicationUser);
 
@@ -76,7 +76,7 @@ class ApplicationUserRepositoryAdapterTest {
 
     @Test
     void should_find_all_github_users_and_yours_roles() {
-        ApplicationUser stubApplicationUser = ApplicationUsersFactory.generateGitHubUserWithRole(0L, "login", "http://url.com/");
+        ApplicationUser stubApplicationUser = ApplicationUsersFactory.generateGitHubUserWithRole(null, "login", "http://url.com/");
         repository.save(stubApplicationUser);
 
         List<ApplicationUser> findUsers = repository.findAll();
@@ -87,8 +87,8 @@ class ApplicationUserRepositoryAdapterTest {
 
     @Test
     void should_find_github_user_by_id() {
-        ApplicationUser stubApplicationUser = ApplicationUsersFactory.generateGitHubUserWithRole(1L, "login", "http://url.com/");
-        repository.save(stubApplicationUser);
+        ApplicationUser stubApplicationUser = ApplicationUsersFactory.generateGitHubUserWithRole(null, "login", "http://url.com/");
+        stubApplicationUser = repository.save(stubApplicationUser);
 
         ApplicationUser findUser = repository.findById(stubApplicationUser.getId());
 
@@ -99,7 +99,7 @@ class ApplicationUserRepositoryAdapterTest {
 
     @Test
     void should_find_user_by_login(){
-        ApplicationUser stubApplicationUser = ApplicationUsersFactory.generateGitHubUserWithRole(1L, "login", "http://url.com/");
+        ApplicationUser stubApplicationUser = ApplicationUsersFactory.generateGitHubUserWithRole(null, "login", "http://url.com/");
         repository.save(stubApplicationUser);
 
         ApplicationUser findUser = repository.findByLogin(stubApplicationUser.getLogin());
@@ -111,7 +111,7 @@ class ApplicationUserRepositoryAdapterTest {
 
     @Test
     void should_return_true_if_user_login_already_exists() {
-        ApplicationUser applicationUser = ApplicationUsersFactory.generateGitHubUserWithRole(1L, "login", "http://url.com/");
+        ApplicationUser applicationUser = ApplicationUsersFactory.generateGitHubUserWithRole(null, "login", "http://url.com/");
         repository.save(applicationUser);
 
         Boolean find = repository.existsByLogin(applicationUser.getLogin());
@@ -121,7 +121,7 @@ class ApplicationUserRepositoryAdapterTest {
 
     @Test
     void should_return_false_if_user_login_not_exists() {
-        ApplicationUser applicationUser = ApplicationUsersFactory.generateGitHubUserWithRole(1L, "login", "http://url.com/");
+        ApplicationUser applicationUser = ApplicationUsersFactory.generateGitHubUserWithRole(null, "login", "http://url.com/");
 
         Boolean find = repository.existsByLogin(applicationUser.getLogin());
 

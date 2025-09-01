@@ -23,6 +23,19 @@ public class ApplicationUsersFactory {
         return applicationUserList;
     }
 
+    public static List<ApplicationUser> generateGitHubUsersWithoutId(Integer quantity) {
+        List<ApplicationUser> applicationUserList = new ArrayList<>();
+        for (int i = 0; i < quantity; i++) {
+            ApplicationUser applicationUser = ApplicationUsersFactory.generateGitHubUser(
+                    null,
+                    "login" + i,
+                    "https://www.url" + i + ".test/"
+            );
+            applicationUserList.add(applicationUser);
+        }
+        return applicationUserList;
+    }
+
     public static ApplicationUser generateGitHubUser(Long id, String login, String url) {
         return new ApplicationUser(
                 id,
